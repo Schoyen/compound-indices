@@ -26,7 +26,6 @@ def inds_to_comp_sq(indices, L):
     # Fetch the current shell
     i = indices[0]
     # Calculate how many indices are ahead of the current shell
-    # This should be *something-something-Pascal's-triangle*
     num_ahead = pascal_shells(num_shells, N, i)
 
     # The amount to subtract from each index and L
