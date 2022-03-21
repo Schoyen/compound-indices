@@ -13,7 +13,7 @@ def pascal_shells(num_shells, N, i):
     return num_ahead
 
 
-def inds_to_comp_sq(indices, L):
+def inds_to_comp(indices, L):
     N = len(indices)
 
     assert 0 < N <= L
@@ -31,7 +31,7 @@ def inds_to_comp_sq(indices, L):
     # The amount to subtract from each index and L
     sub = i + 1
 
-    return num_ahead + inds_to_comp_sq(
+    return num_ahead + inds_to_comp(
         [ind - sub for ind in indices[1:]],
         L - sub,
     )

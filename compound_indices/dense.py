@@ -1,4 +1,4 @@
-def inds_to_comp_sq(indices, L):
+def inds_to_comp(indices, L):
     N = len(indices)
 
     comp = 0
@@ -9,7 +9,7 @@ def inds_to_comp_sq(indices, L):
     return comp
 
 
-def comp_to_inds_sq(I, L, N):
+def comp_to_inds(I, L, N):
     indices = [0] * N
 
     for i in range(N - 1):
