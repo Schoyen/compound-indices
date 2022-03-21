@@ -35,3 +35,22 @@ def inds_to_comp(indices, L):
         [ind - sub for ind in indices[1:]],
         L - sub,
     )
+
+
+def sign_of_inds(indices):
+    N = len(indices)
+    sign = 1
+    prev_value = -1
+
+    for i in range(N):
+        index_min = min(range(len(indices)), key=indices.__getitem__)
+
+        # Two or more equal values
+        if indices[index_min] == prev_value:
+            return 0
+
+        prev_value = indices[index_min]
+        sign *= (-1) ** index_min
+        indices = indices[:index_min] + indices[index_min + 1 :]
+
+    return sign
