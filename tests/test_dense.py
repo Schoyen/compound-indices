@@ -8,6 +8,10 @@ from compound_indices.dense import (
 )
 
 
+def test_fail():
+    assert False
+
+
 def test_single_sq():
     L = 5
     counter = 0
