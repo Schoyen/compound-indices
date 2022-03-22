@@ -70,7 +70,6 @@ def comp_to_inds(I, L, N):
     if I == current_shell - 1:
         return [L - N + i for i in range(N)]
 
-    indices = []
     previous_shell = math.comb(L - 1, N)
 
     num_ahead = current_shell - previous_shell
@@ -78,9 +77,9 @@ def comp_to_inds(I, L, N):
 
     for i in range(2, L):
         if num_behind <= I < num_ahead:
-            indices.append(i - 2)
             indices = [i - 2] + [
-                j + i - 1 for j in comp_to_inds(I - num_behind, L - i, N - 1)
+                j + i - 1
+                for j in comp_to_inds(I - num_behind, L - i + 1, N - 1)
             ]
             return indices
 
@@ -88,3 +87,5 @@ def comp_to_inds(I, L, N):
         previous_shell = math.comb(L - i, N)
         num_behind = num_ahead
         num_ahead += current_shell - previous_shell
+
+    assert False, "You should not be here (☉_☉)"
