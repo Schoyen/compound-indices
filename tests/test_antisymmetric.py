@@ -74,8 +74,8 @@ def test_triple_to_comp():
                 assert sign_of_inds([j, i, k]) == -1
                 assert sign_of_inds([j, k, i]) == 1
                 assert sign_of_inds([k, j, i]) == -1
-                # inds = comp_to_inds(comp, L, 3)
-                # assert inds == [i, j, k]
+                inds = comp_to_inds(comp, L, 3)
+                assert inds == [i, j, k]
                 assert counter == comp
                 counter += 1
 
@@ -97,6 +97,8 @@ def test_quad_to_comp():
                     assert sign_of_inds([j, i, k, l]) == -1
                     assert sign_of_inds([i, j, l, k]) == -1
                     assert sign_of_inds([l, i, j, k]) == -1
+                    inds = comp_to_inds(comp, L, 4)
+                    assert inds == [i, j, k, l]
                     assert counter == comp
                     counter += 1
 
@@ -113,6 +115,8 @@ def test_5_to_comp():
                 for l in range(k + 1, L):
                     for p in range(l + 1, L):
                         comp = inds_to_comp([i, j, k, l, p], L)
+                        inds = comp_to_inds(comp, L, 5)
+                        assert inds == [i, j, k, l, p]
                         assert counter == comp
                         counter += 1
 
@@ -130,6 +134,8 @@ def test_6_to_comp():
                     for p in range(l + 1, L):
                         for q in range(p + 1, L):
                             comp = inds_to_comp([i, j, k, l, p, q], L)
+                            inds = comp_to_inds(comp, L, 6)
+                            assert inds == [i, j, k, l, p, q]
                             assert counter == comp
                             counter += 1
 
