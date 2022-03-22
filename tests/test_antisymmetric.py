@@ -1,6 +1,10 @@
 import math
 
-from compound_indices.antisymmetric import inds_to_comp, sign_of_inds
+from compound_indices.antisymmetric import (
+    inds_to_comp,
+    sign_of_inds,
+    comp_to_inds,
+)
 
 
 def test_levi_civita_3():
@@ -31,6 +35,8 @@ def test_single_to_comp():
     for i in range(L):
         comp = inds_to_comp([i], L)
         assert sign_of_inds([i]) == 1
+        inds = comp_to_inds(comp, L, 1)
+        assert inds == [i]
         assert counter == comp
         counter += 1
 
@@ -47,6 +53,8 @@ def test_pair_to_comp():
             comp = inds_to_comp([i, j], L)
             assert sign_of_inds([i, j]) == 1
             assert sign_of_inds([j, i]) == -1
+            inds = comp_to_inds(comp, L, 2)
+            assert inds == [i, j]
             assert counter == comp
             counter += 1
 
@@ -66,6 +74,8 @@ def test_triple_to_comp():
                 assert sign_of_inds([j, i, k]) == -1
                 assert sign_of_inds([j, k, i]) == 1
                 assert sign_of_inds([k, j, i]) == -1
+                # inds = comp_to_inds(comp, L, 3)
+                # assert inds == [i, j, k]
                 assert counter == comp
                 counter += 1
 
