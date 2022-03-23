@@ -27,9 +27,29 @@ def inds_to_comp(indices, L):
 
 
 if __name__ == "__main__":
-    print(pascal_shells(7, 2, 6))
-    print(pascal_shells(8, 3, 1))
-    print(pascal_shells(7, 3, 1) + 7)
+    import math
 
-    print(pascal_shells(8, 2, 7))
-    print(pascal_shells(8, 3, 1))
+    L = 5
+    counter = 0
+
+    for i in range(L):
+        for j in range(i, L):
+            print(f"({i}, {j}) -> {counter}")
+            counter += 1
+
+    counter = 0
+
+    for i in range(L):
+        for j in range(i, L):
+            for k in range(j, L):
+                print(f"({i}, {j}, {k}) -> {counter}")
+                counter += 1
+
+    counter = 0
+
+    for i in range(L):
+        for j in range(i, L):
+            for k in range(j, L):
+                for l in range(k, L):
+                    print(f"({i}, {j}, {k}, {l}) -> {counter}")
+                    counter += 1
