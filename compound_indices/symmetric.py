@@ -1,6 +1,12 @@
 from compound_indices.antisymmetric import pascal_shells
 
 
+def gen_gauss_sum(start, stop):
+    return (stop - start + 1) * (stop - start + 2) / 2 + (start - 1) * (
+        stop - start + 1
+    )
+
+
 def inds_to_comp(indices, L):
     N = len(indices)
 
@@ -30,21 +36,42 @@ if __name__ == "__main__":
     import math
 
     L = 5
+    shell_counter = 0
+    prev_shell = 0
     counter = 0
 
     for i in range(L):
+        print(L * (L - i + 1) - gen_gauss_sum(i, L - 1))
+        print(f"Num above this shell: {shell_counter}")
+        print(f"Shell difference: {shell_counter - prev_shell}")
         for j in range(i, L):
             print(f"({i}, {j}) -> {counter}")
             counter += 1
 
+        prev_shell = shell_counter
+        shell_counter += L - i
+
+    print(gen_gauss_sum(i, L))
+    print(f"Num above this shell: {shell_counter}")
+    print(f"Shell difference: {shell_counter - prev_shell}")
+
+    wat
     counter = 0
+    shell_counter = 0
+    prev_shell = 0
 
     for i in range(L):
+        print(f"Num above this shell: {shell_counter}")
+        print(f"Shell difference: {shell_counter - prev_shell}")
         for j in range(i, L):
             for k in range(j, L):
                 print(f"({i}, {j}, {k}) -> {counter}")
                 counter += 1
 
+        prev_shell = shell_counter
+        shell_counter += sum(L - j for j in range(i, L))
+
+    wat
     counter = 0
 
     for i in range(L):
