@@ -1,4 +1,6 @@
-from compound_indices.antisymmetric import pascal_shells
+import math
+
+# from compound_indices.antisymmetric import pascal_shells
 
 
 def gen_gauss_sum(start, stop):
@@ -19,11 +21,26 @@ def inds_to_comp(indices, L):
     num_shells = L
     # Fetch the current shell
     i = indices[0]
+
+    if i == L - 1:
+        return math.comb(L + N - 1, N) - 1
+
     # Calculate how many indices are ahead of the current shell
-    num_ahead = pascal_shells(num_shells, N, i)
+    # num_ahead = pascal_shells(num_shells, N, i)
+    num_ahead = 0
+
+    if i > 0:
+        if len(indices) > 2:
+            print(L, N, i)
+            print(math.comb(L + N - 1, N - 1))
+            print(math.comb(L + N - 2, N - 1))
+            print(math.comb(L + N - 1 - i, N - 1))
+            print("BLEH")
+        num_ahead = sum(math.comb(L + 1 - _i, N - 1) - 1 for _i in range(i))
     print(num_ahead)
 
     # The amount to subtract from each index and L
+    # sub = (i + 1 if i < indices[1] and len(indices[1:]) > 1 else i)
     sub = i
 
     return num_ahead + inds_to_comp(
