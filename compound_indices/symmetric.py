@@ -28,16 +28,24 @@ def inds_to_comp(indices, L):
     # Calculate how many indices are ahead of the current shell
     # num_ahead = pascal_shells(num_shells, N, i)
     num_ahead = 0
+    L_eff = L
 
-    if i > 0:
-        if len(indices) > 2:
-            print(L, N, i)
-            print(math.comb(L + N - 1, N - 1))
-            print(math.comb(L + N - 2, N - 1))
-            print(math.comb(L + N - 1 - i, N - 1))
-            print("BLEH")
-        num_ahead = sum(math.comb(L + 1 - _i, N - 1) - 1 for _i in range(i))
-    print(num_ahead)
+    for _i in range(i):
+        num_ahead += math.prod(
+            (L_eff - _j) for _j in range(N - 1)
+        ) / math.factorial(N - 1)
+        L_eff = L - _i
+    # if i > 0:
+    #     # if len(indices) > 2:
+    #     #     print(L, N, i)
+    #     #     print(math.comb(L + N - 1, N - 1))
+    #     #     print(math.comb(L + N - 2, N - 1))
+    #     #     print(math.comb(L + N - 1 - i, N - 1))
+    #     #     print("BLEH")
+    #     print([L - _i for _i in range(N - 1)])
+    #     num_ahead += math.prod((L - _i) for _i in range(N - 1)) / math.factorial(N - 1) + L
+    # num_ahead = sum(math.comb(L + 1 - _i, N - 1) - 1 for _i in range(i))
+    print(f"In inds_to_comp: {num_ahead}")
 
     # The amount to subtract from each index and L
     # sub = (i + 1 if i < indices[1] and len(indices[1:]) > 1 else i)
@@ -62,7 +70,8 @@ if __name__ == "__main__":
         print(f"Num above this shell: {shell_counter}")
         print(f"Shell difference: {shell_counter - prev_shell}")
         for j in range(i, L):
-            print(f"({i}, {j}) -> {counter}")
+            comp = inds_to_comp([i, j], L)
+            print(f"({i}, {j}) -> {counter}\t comp = {comp}")
             counter += 1
 
         prev_shell = shell_counter
