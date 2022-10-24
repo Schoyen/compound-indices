@@ -1,40 +1,60 @@
 import math
 
 
-def pascal_shells(num_shells, N, i):
-    if i == 0:
-        return 0
+def inds_to_comp(ind, L):
+    # Assuming sorted indces as ind[0] < ind[1] < ... < ind[L]
+    I = 0
 
-    num_ahead = 0
+    for k in range(1, len(ind) + 1):
+        I += math.comb(ind[k - 1], k)
 
-    for _i in range(i):
-        num_ahead += math.comb(num_shells - _i, N - 1)
-
-    return num_ahead
+    return I
 
 
-def inds_to_comp(indices, L):
-    N = len(indices)
+def J(inds, N, L):
+    # Solution from PHYSICAL REVIEW A 81, 022124 (2010)
+    # This solution counts the number of holes, i.e., non-occupied states.
+    M = L - N
+    comp = 1
+    for k in range(M):
+        comp += comb(N + M - inds[k], M - k)
+    return comp
 
-    assert 0 < N <= L
 
-    if N == 1:
-        return indices[0]
-
-    # Total number of shells
-    num_shells = L - 1
-    # Fetch the current shell
-    i = indices[0]
-    # Calculate how many indices are ahead of the current shell
-    num_ahead = pascal_shells(num_shells, N, i)
-
-    # The amount to subtract from each index and L
-    sub = i + 1
-
-    return num_ahead + inds_to_comp(
-        [ind - sub for ind in indices[1:]],
-        L - sub,
-    )
+# def pascal_shells(num_shells, N, i):
+#     if i == 0:
+#         return 0
+#
+#     num_ahead = 0
+#
+#     for _i in range(i):
+#         num_ahead += math.comb(num_shells - _i, N - 1)
+#
+#     return num_ahead
+#
+#
+# def inds_to_comp(indices, L):
+#     N = len(indices)
+#
+#     assert 0 < N <= L
+#
+#     if N == 1:
+#         return indices[0]
+#
+#     # Total number of shells
+#     num_shells = L - 1
+#     # Fetch the current shell
+#     i = indices[0]
+#     # Calculate how many indices are ahead of the current shell
+#     num_ahead = pascal_shells(num_shells, N, i)
+#
+#     # The amount to subtract from each index and L
+#     sub = i + 1
+#
+#     return num_ahead + inds_to_comp(
+#         [ind - sub for ind in indices[1:]],
+#         L - sub,
+#     )
 
 
 def sign_of_inds(indices):
