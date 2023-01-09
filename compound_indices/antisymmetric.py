@@ -1,24 +1,21 @@
 import math
 
 
-def inds_to_comp(ind, L):
-    # Assuming sorted indces as ind[0] < ind[1] < ... < ind[L]
-    I = 0
+def inds_to_comp(indices, L):
+    # Modified solution from PHYSICAL REVIEW A 81, 022124 (2010)
+    # Assuming sorted indces as indices[0] < indices[1] < ... < indices[L]
 
-    for k in range(1, len(ind) + 1):
-        I += math.comb(ind[k - 1], k)
+    N = len(indices)
+    assert N <= L
 
-    return I
-
-
-def J(inds, N, L):
-    # Solution from PHYSICAL REVIEW A 81, 022124 (2010)
-    # This solution counts the number of holes, i.e., non-occupied states.
     M = L - N
-    comp = 1
-    for k in range(M):
-        comp += comb(N + M - inds[k], M - k)
-    return comp
+
+    comp = 0
+
+    for k in range(1, N + 1):
+        comp += math.comb(L - (indices[k - 1] + 1), N + 1 - k)
+
+    return math.comb(L, M) - 1 - comp
 
 
 # def pascal_shells(num_shells, N, i):
