@@ -3,7 +3,7 @@ import math
 
 def inds_to_comp(indices, L):
     # Modified solution from PHYSICAL REVIEW A 81, 022124 (2010)
-    # Assuming sorted indces as indices[0] < indices[1] < ... < indices[L]
+    # Assuming sorted indices as indices[0] < indices[1] < ... < indices[L]
 
     N = len(indices)
     assert N <= L
