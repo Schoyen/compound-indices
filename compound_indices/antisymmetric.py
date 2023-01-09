@@ -18,6 +18,20 @@ def inds_to_comp(indices, L):
     return math.comb(L, M) - 1 - comp
 
 
+def comp_to_inds(comp, L, N):
+    indices = [0] * N
+    x = 1
+    for i in range(1, N + 1):
+        while comp >= math.comb(L - x, N - i):
+            comp -= math.comb(L - x, N - i)
+            x += 1
+
+        indices[i - 1] = x - 1
+        x += 1
+
+    return indices
+
+
 def sign_of_inds(indices):
     N = len(indices)
     sign = 1
