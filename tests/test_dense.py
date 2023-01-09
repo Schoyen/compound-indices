@@ -3,8 +3,6 @@ import math
 from compound_indices.dense import (
     inds_to_comp,
     comp_to_inds,
-    inds_to_comp_as,
-    comp_to_inds_as,
 )
 
 
@@ -27,9 +25,9 @@ def test_single_as():
     counter = 0
 
     for i in range(L[0]):
-        comp = inds_to_comp_as((i,), L)
+        comp = inds_to_comp((i,), L)
         assert comp == counter
-        inds = comp_to_inds_as(comp, L, 1)
+        inds = comp_to_inds(comp, L, 1)
         assert inds == [i]
         counter += 1
 
@@ -57,9 +55,9 @@ def test_pair_as():
 
     for i in range(L[0]):
         for j in range(L[1]):
-            comp = inds_to_comp_as((i, j), L)
+            comp = inds_to_comp((i, j), L)
             assert comp == counter
-            inds = comp_to_inds_as(comp, L, 2)
+            inds = comp_to_inds(comp, L, 2)
             assert inds == [i, j]
             counter += 1
 
@@ -89,9 +87,9 @@ def test_triple_as():
     for i in range(L[0]):
         for j in range(L[1]):
             for k in range(L[2]):
-                comp = inds_to_comp_as((i, j, k), L)
+                comp = inds_to_comp((i, j, k), L)
                 assert comp == counter
-                inds = comp_to_inds_as(comp, L, 3)
+                inds = comp_to_inds(comp, L, 3)
                 assert inds == [i, j, k]
                 counter += 1
 
@@ -123,9 +121,9 @@ def test_quad_sq():
         for j in range(L[1]):
             for k in range(L[2]):
                 for l in range(L[3]):
-                    comp = inds_to_comp_as((i, j, k, l), L)
+                    comp = inds_to_comp((i, j, k, l), L)
                     assert comp == counter
-                    inds = comp_to_inds_as(comp, L, 4)
+                    inds = comp_to_inds(comp, L, 4)
                     assert inds == [i, j, k, l]
                     counter += 1
 

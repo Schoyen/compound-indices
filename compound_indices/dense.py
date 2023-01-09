@@ -4,27 +4,13 @@ import math
 def inds_to_comp(indices, L):
     N = len(indices)
 
-    comp = 0
+    # Check if L is an iterable
+    try:
+        _ = iter(L)
+    except TypeError:
+        # Make L into an iterable
+        L = [L] * N
 
-    for i in range(N):
-        comp += indices[i] * L ** (N - i - 1)
-
-    return comp
-
-
-def comp_to_inds(I, L, N):
-    indices = [0] * N
-
-    for i in range(N - 1):
-        indices[i] = (I // (L ** (N - i - 1))) % L
-
-    indices[-1] = I % L
-
-    return indices
-
-
-def inds_to_comp_as(indices, L):
-    N = len(indices)
     assert len(L) == N
 
     comp = 0
@@ -36,8 +22,16 @@ def inds_to_comp_as(indices, L):
     return comp
 
 
-def comp_to_inds_as(I, L, N):
+def comp_to_inds(I, L, N):
     indices = [0] * N
+
+    # Check if L is an iterable
+    try:
+        _ = iter(L)
+    except TypeError:
+        # Make L into an iterable
+        L = [L] * N
+
     assert len(L) == N
 
     for i in range(N - 1):
