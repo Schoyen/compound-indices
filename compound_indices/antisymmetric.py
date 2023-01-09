@@ -12,8 +12,8 @@ def inds_to_comp(indices, L):
 
     comp = 0
 
-    for k in range(1, N + 1):
-        comp += math.comb(L - (indices[k - 1] + 1), N + 1 - k)
+    for k in range(N):
+        comp += math.comb(L - (indices[k] + 1), N - k)
 
     return math.comb(L, M) - 1 - comp
 
