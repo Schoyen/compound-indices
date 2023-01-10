@@ -2,6 +2,8 @@ import math
 
 from compound_indices.symmetric import inds_to_comp
 
+from helpers.utils import ind_gen
+
 
 def test_single_to_comp():
     L = 5
@@ -50,19 +52,15 @@ def test_triple_to_comp():
     assert counter == math.comb(L + 2, 3)
 
 
-# def test_quad_to_comp():
-#     L = 8
-#     counter = 0
-#
-#     for i in range(L):
-#         for j in range(i, L):
-#             for k in range(j, L):
-#                 for l in range(k, L):
-#                     comp = inds_to_comp([i, j, k, l], L)
-#                     # inds = comp_to_inds(comp, L, 4)
-#                     # assert inds == [i, j, k, l]
-#                     print([i, j, k, l])
-#                     assert counter == comp
-#                     counter += 1
-#
-#     assert counter == math.comb(L + 3, 4)
+def test_many_to_comp():
+    L = 8
+
+    for N in range(1, L + 1):
+        for counter, inds in enumerate(ind_gen(0, L, N, kind="s")):
+            comp = inds_to_comp(inds, L)
+            # c_inds = comp_to_inds(comp, L, N)
+            # assert inds == c_inds
+            assert counter == comp
+
+        # Counter does not count the final step (as in the manual loops)
+        assert counter == (math.comb(L + N - 1, N) - 1)
