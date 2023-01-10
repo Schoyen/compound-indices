@@ -31,5 +31,5 @@ if __name__ == "__main__":
     for i in ind_gen(0, 5, 3, kind="a"):
         print(i)
 
-    for i in ind_gen(0, 6, 3, kind="a"):
+    for i in ind_gen(0, 9, 6, kind="s"):
         print(i)
